@@ -5,14 +5,34 @@
   
 
   
-  <title>松果·JD</title>
+  <title>NodeJS深入浅出之异步IO | 松果·JD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="松果·JD">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+  <meta name="description" content="为什么要异步I&#x2F;O 在跨网络结构下，I&#x2F;O具体到实处可以从用户体验和资源分配两方面说起。   用户体验  采用异步请求，在下载资源期间，JavaScript和UI的执行都不会处于等待状态，可以继续响应用户的交互行为。  同步与异步时间消耗对比，前者时间为M+N，后者为max(M+N)  同步代码如下：   1234&#x2F;&#x2F; 消耗时间为MgetData(&amp;apos;from_db&amp;apos;);&#x2F;&#x2F; 消耗时间为NgetDa">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJS深入浅出之异步IO">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;27&#x2F;NodeJS%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%BC%82%E6%AD%A5IO&#x2F;index.html">
 <meta property="og:site_name" content="松果·JD">
+<meta property="og:description" content="为什么要异步I&#x2F;O 在跨网络结构下，I&#x2F;O具体到实处可以从用户体验和资源分配两方面说起。   用户体验  采用异步请求，在下载资源期间，JavaScript和UI的执行都不会处于等待状态，可以继续响应用户的交互行为。  同步与异步时间消耗对比，前者时间为M+N，后者为max(M+N)  同步代码如下：   1234&#x2F;&#x2F; 消耗时间为MgetData(&amp;apos;from_db&amp;apos;);&#x2F;&#x2F; 消耗时间为NgetDa">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;async_io.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;choke_io.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;un_choke_io.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_read.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_select.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_poll.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_epoll.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_perfection.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;polling_multi_thread.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;libuv.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;tick.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;fs_open.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;global_io_process.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;settimeout_behavior.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;node_web_server.png">
+<meta property="og:updated_time" content="2019-10-27T06:13:02.079Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;zqjflash&#x2F;nodejs-IO&#x2F;master&#x2F;async_io.png">
   
     <link rel="alternate" href="/atom.xml" title="松果·JD" type="application/atom+xml">
   
@@ -59,9 +79,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-NodeJS深入浅出之异步IO" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-NodeJS深入浅出之异步IO" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/27/NodeJS%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%BC%82%E6%AD%A5IO/" class="article-date">
   <time datetime="2019-10-27T05:01:44.000Z" itemprop="datePublished">2019-10-27</time>
@@ -74,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/NodeJS%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%BC%82%E6%AD%A5IO/">NodeJS深入浅出之异步IO</a>
+    <h1 class="article-title" itemprop="name">
+      NodeJS深入浅出之异步IO
     </h1>
   
 
@@ -347,110 +365,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-NodeJS-深入浅出之模块机制" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" class="article-date">
-  <time datetime="2019-10-27T05:01:03.000Z" itemprop="datePublished">2019-10-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/">NodeJS 深入浅出之模块机制</a>
-    </h1>
+    <a href="/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NodeJS 深入浅出之模块机制</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="无模块系统到commonjs"><a href="#无模块系统到commonjs" class="headerlink" title="无模块系统到commonjs"></a>无模块系统到commonjs</h2><ul>
-<li>发展历程这里就不再多说了<h2 id="commonjs模块规范"><a href="#commonjs模块规范" class="headerlink" title="commonjs模块规范"></a>commonjs模块规范</h2>模块分类：核心模块、文件模块、自定义模块<h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，就直接加载进了内存</span><br></pre></td></tr></table></figure>
-<h3 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">以 .、..、/、开始的路径形式的模块</span><br></pre></td></tr></table></figure>
-<h3 id="自定义模块"><a href="#自定义模块" class="headerlink" title="自定义模块"></a>自定义模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这类模块查找最费时间，也是最慢的一种方式。需要递归的向上查找node_modules目录</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="NPM常用功能"><a href="#NPM常用功能" class="headerlink" title="NPM常用功能"></a>NPM常用功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm钩子命令:</span><br><span class="line">    preinstall install uninstall postinstall test</span><br></pre></td></tr></table></figure>
-
-<h2 id="webpack是如何hack浏览器的无模块系统的"><a href="#webpack是如何hack浏览器的无模块系统的" class="headerlink" title="webpack是如何hack浏览器的无模块系统的"></a>webpack是如何hack浏览器的无模块系统的</h2><ul>
-<li><a href="https://github.com/alienzhou/blog/issues/19" target="_blank" rel="noopener">webpack 前端运行时模块设计与实现</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前端同步依赖问题：</span><br><span class="line">Node作为服务端语言，模块都是本地文件，加载时延低，可同步阻塞进行模块文件寻址、读取、编译和执行，这些过程在模块require的时候再“按需”执行即可；而webpack运行在客户端（浏览器），显然不能在需要时（即执行__webpack_require__时）再通过网络加载js文件，并同步地等待加载完成后再返回__webpack_require__。这种网络时延，显然不能满足“同步依赖”的要求.</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" data-id="ck28j1zr20000y0v96u3adm97" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/" rel="tag">NodeJS</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/27/hello-world/" class="article-date">
-  <time datetime="2019-10-27T04:29:41.022Z" itemprop="datePublished">2019-10-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/27/hello-world/" data-id="ck28j1zrf0003y0v9fyq3bay8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         

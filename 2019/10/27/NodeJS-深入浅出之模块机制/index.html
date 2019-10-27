@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>NodeJS 深入浅出之模块机制 | 松果·JD</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="无模块系统到commonjs 发展历程这里就不再多说了commonjs模块规范模块分类：核心模块、文件模块、自定义模块核心模块1核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，就直接加载进了内存 文件模块1以 .、..、&#x2F;、开始的路径形式的模块 自定义模块1这类模块查找最费时间，也是最慢的一种方式。需要递归的向上查找node_modules目录    NPM">
+<meta name="keywords" content="NodeJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NodeJS 深入浅出之模块机制">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;10&#x2F;27&#x2F;NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6&#x2F;index.html">
+<meta property="og:site_name" content="松果·JD">
+<meta property="og:description" content="无模块系统到commonjs 发展历程这里就不再多说了commonjs模块规范模块分类：核心模块、文件模块、自定义模块核心模块1核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，就直接加载进了内存 文件模块1以 .、..、&#x2F;、开始的路径形式的模块 自定义模块1这类模块查找最费时间，也是最慢的一种方式。需要递归的向上查找node_modules目录    NPM">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-10-27T06:03:24.413Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="松果·JD" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">松果·JD</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-NodeJS-深入浅出之模块机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time datetime="2019-10-27T05:01:03.000Z" itemprop="datePublished">2019-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      NodeJS 深入浅出之模块机制
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="无模块系统到commonjs"><a href="#无模块系统到commonjs" class="headerlink" title="无模块系统到commonjs"></a>无模块系统到commonjs</h2><ul>
+<li>发展历程这里就不再多说了<h2 id="commonjs模块规范"><a href="#commonjs模块规范" class="headerlink" title="commonjs模块规范"></a>commonjs模块规范</h2>模块分类：核心模块、文件模块、自定义模块<h3 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">核心模块部分在Node源代码的编译过程中，编译进了二进制执行文件。在Node进程启动时，就直接加载进了内存</span><br></pre></td></tr></table></figure>
+<h3 id="文件模块"><a href="#文件模块" class="headerlink" title="文件模块"></a>文件模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">以 .、..、/、开始的路径形式的模块</span><br></pre></td></tr></table></figure>
+<h3 id="自定义模块"><a href="#自定义模块" class="headerlink" title="自定义模块"></a>自定义模块</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">这类模块查找最费时间，也是最慢的一种方式。需要递归的向上查找node_modules目录</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="NPM常用功能"><a href="#NPM常用功能" class="headerlink" title="NPM常用功能"></a>NPM常用功能</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm钩子命令:</span><br><span class="line">    preinstall install uninstall postinstall test</span><br></pre></td></tr></table></figure>
+
+<h2 id="webpack是如何hack浏览器的无模块系统的"><a href="#webpack是如何hack浏览器的无模块系统的" class="headerlink" title="webpack是如何hack浏览器的无模块系统的"></a>webpack是如何hack浏览器的无模块系统的</h2><ul>
+<li><a href="https://github.com/alienzhou/blog/issues/19" target="_blank" rel="noopener">webpack 前端运行时模块设计与实现</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前端同步依赖问题：</span><br><span class="line">Node作为服务端语言，模块都是本地文件，加载时延低，可同步阻塞进行模块文件寻址、读取、编译和执行，这些过程在模块require的时候再“按需”执行即可；而webpack运行在客户端（浏览器），显然不能在需要时（即执行__webpack_require__时）再通过网络加载js文件，并同步地等待加载完成后再返回__webpack_require__。这种网络时延，显然不能满足“同步依赖”的要求.</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/" data-id="ck28j1zr20000y0v96u3adm97" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NodeJS/" rel="tag">NodeJS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/27/NodeJS%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%BC%82%E6%AD%A5IO/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NodeJS深入浅出之异步IO
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/27/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/NodeJS/" rel="tag">NodeJS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/NodeJS/" style="font-size: 10px;">NodeJS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/27/NodeJS%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E5%BC%82%E6%AD%A5IO/">NodeJS深入浅出之异步IO</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/NodeJS-%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%B9%8B%E6%A8%A1%E5%9D%97%E6%9C%BA%E5%88%B6/">NodeJS 深入浅出之模块机制</a>
+          </li>
+        
+          <li>
+            <a href="/2019/10/27/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 JD<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
