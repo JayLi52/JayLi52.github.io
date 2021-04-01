@@ -27,6 +27,7 @@ function oval(x0, y0, a, b, startAng = 0, endAng = Math.PI * 2) {
   const ang = Math.min(TAU, endAng - startAng);
   const ret = ang === TAU ? [] : [[x0, y0]];
   const segments = Math.round(TAU_SEGMENTS * ang / TAU);
+  console.log('oval', segments)
   for(let i = 0; i <= segments; i++) {
     const x = x0 + a * Math.cos(startAng + ang * i / segments);
     const y = y0 + b * Math.sin(startAng + ang * i / segments);
@@ -40,6 +41,7 @@ function arc(x0, y0, radius, startAng = 0, endAng = Math.PI * 2) {
   const ang = Math.min(TAU, endAng - startAng);
   const ret = ang === TAU ? [] : [[x0, y0]];
   const segments = Math.round(TAU_SEGMENTS * ang / TAU);
+  console.log('circle', segments)
   for(let i = 0; i <= segments; i++) {
     const x = x0 + radius * Math.cos(startAng + ang * i / segments);
     const y = y0 + radius * Math.sin(startAng + ang * i / segments);
@@ -50,4 +52,8 @@ function arc(x0, y0, radius, startAng = 0, endAng = Math.PI * 2) {
 
 draw(arc(0, 0, 100));
 
+console.log(arc(0, 0, 100))
+
 draw(oval(0, 0, 240, 150));
+
+console.log(oval(0, 0, 240, 150))
