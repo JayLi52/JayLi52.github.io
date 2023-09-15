@@ -144,6 +144,7 @@
                 // eq.emit('creationComplete');
                 setTimeout(() => {
                     eq.isCreationComplete = true;
+                    eq.alpha = 1;
                     eq.creationComplete();
                 }, 0);
             }
@@ -497,7 +498,11 @@
     <script src="./pixi-particles.js"></script>
     <script src="./pixi-util/bundle.js"></script>
     <script src="./jquery.js"></script>
+    <script src="./dep/TweenMax.min.js"></script>
     <script src="./eqs/index-bundle.js"></script>
+    <script src="./commands/index-bundle.js"></script>
+    <script src="./pixi-util/NBDrag-bundle.js"></script>
+    <script src="./dep/const.js"></script>
     <script src="app.js"></script>
   </body>
 </html>

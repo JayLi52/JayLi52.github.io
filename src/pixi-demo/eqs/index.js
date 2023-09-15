@@ -1,7 +1,7 @@
 const AlcoholBurner = require('./AlcoholBurner')
 
 const eqs = {
-    AlcoholBurner
+    AlcoholBurner,
 }
 global.eqs = eqs;
 module.exports = eqs;
