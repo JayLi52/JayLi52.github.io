@@ -1,6 +1,4 @@
 # Ignore compiled JavaScript files
-*.js
-*.js.map
 
 # Ignore compiled TypeScript declaration files
 *.d.ts
