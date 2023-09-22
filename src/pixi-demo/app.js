@@ -22,8 +22,8 @@ canvas.height = scale * 835;
 
 // // 设置canvas的样式属性
 canvas.style.touchAction = 'none';
-canvas.style.width = '100vw';
-canvas.style.height = '100vh';
+canvas.style.width = '830px';
+canvas.style.height = '835px';
 canvas.style.position = 'absolute';
 canvas.style.backgroundColor = 'rgb(52, 57, 65)';
 canvas.style.cursor = 'inherit';
@@ -70,7 +70,7 @@ PIXI.loader.add("assets/skin.json").load(() => {
   app.stage.addChild(particleLayer);
   app.stage.addChild(eqLayer);
   createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
-  createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
+  // createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
 });
 
 const map = {
