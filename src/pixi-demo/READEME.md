@@ -8,4 +8,6 @@ browserify src/pixi-demo/components/index.js -o src/pixi-demo/components/index-b
 browserify src/pixi-demo/commands/index.js -o src/pixi-demo/commands/index-bundle.js
 
 browserify src/pixi-demo/pixi-util/NBDrag.js -o src/pixi-demo/pixi-util/NBDrag-bundle.js
+
+browserify src/pixi-demo/basic-util.js -o src/pixi-demo/basic-util-bundle.js
 ```
