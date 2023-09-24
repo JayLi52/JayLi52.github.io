@@ -26,6 +26,16 @@ class AlcoholBurner extends Draggable {
             app.ticker.add((delta) => {
                 this.particle.render(delta / 60);
             });
+            this.checkParticleColl();
+        }
+    }
+
+    checkParticleColl() {
+        // 算出在热辐射半径内距离最近的容器
+
+        // 
+        this.particle.heatInfoObj = {
+            eq: testTueb
         }
     }
 

@@ -1,4 +1,3 @@
-const Vector2 = require("./pixi-util/geom/Vector2.js");
 const GraphicsUtils = require("./utils/GraphicsUtils.js");
 
 const nb = {
@@ -119,7 +118,7 @@ function createEquipment(id, type, classFunc, dataObj_, position_, constructorAt
                   eq.capacityVertex = [];
                   for (var i = 0; i < capacityVertex.length; i++) {
                       var o = confDataItem.capacityVertex[i];
-                      eq.capacityVertex.push(new Vector2(o.x, o.y));
+                      eq.capacityVertex.push(nape.geom.Vec2.get(o.x, o.y));
                   }
                   continue;
               }

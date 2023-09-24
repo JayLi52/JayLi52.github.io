@@ -60,7 +60,7 @@ class ADropper extends Draggable {
 
 module.exports = ADropper;
 
-},{"./Draggable":4}],2:[function(require,module,exports){
+},{"./Draggable":5}],2:[function(require,module,exports){
 const Draggable = require("./Draggable");
 
 class AlcoholBurner extends Draggable {
@@ -89,6 +89,16 @@ class AlcoholBurner extends Draggable {
             app.ticker.add((delta) => {
                 this.particle.render(delta / 60);
             });
+            this.checkParticleColl();
+        }
+    }
+
+    checkParticleColl() {
+        // 算出在热辐射半径内距离最近的容器
+
+        // 
+        this.particle.heatInfoObj = {
+            eq: testTueb
         }
     }
 
@@ -115,16 +125,10 @@ class AlcoholBurner extends Draggable {
 
 module.exports = AlcoholBurner;
 
-},{"./Draggable":4}],3:[function(require,module,exports){
-const {
-  getDivideSpace,
-  getAABB,
-  iterator,
-} = require("../pixi-util/PolygonUtil");
-const Vector2 = require("../pixi-util/geom/Vector2");
-const Draggable = require("./Draggable");
+},{"./Draggable":5}],3:[function(require,module,exports){
+const ChemContainer = require("./ChemContainer");
 
-class TestTube extends Draggable {
+class TestTube extends ChemContainer {
   constructor() {
     super();
     this.init();
@@ -137,18 +141,43 @@ class TestTube extends Draggable {
   }
 
   update() {
-    // let speed = 0;
-    // let setV = false
-    // app.ticker.add((delta) => {
-    // speed += delta * 0.15
-    // this.y += speed * delta;
-    // if (this.children[0] && !setV) {
-    //     this.children[0].alpha = 0.2;
-    //     setV = true;
-    // }
-    // });
-    // console.log(this);
-    // this.drawLiquidGra();
+    super.update();
+  }
+
+  creationComplete() {
+    console.log("creationComplete");
+    eqLayer.addChild(this);
+    this.drawLiquidGra();
+  }
+}
+
+module.exports = TestTube;
+
+},{"./ChemContainer":4}],4:[function(require,module,exports){
+const {
+  getDivideSpace,
+  getAABB,
+  iterator,
+} = require("../pixi-util/PolygonUtil");
+const Vector2 = require("../pixi-util/geom/Vector2");
+const GraphicsUtils = require("../utils/GraphicsUtils");
+const Draggable = require("./Draggable");
+
+class ChemContainer extends Draggable {
+  waveHeight = 0;
+  maxWaveHeight = 0;
+  waveDirection = 1;
+  liquidGra = null;
+
+  constructor() {
+    super();
+    this.init();
+    this.liquidGra = new PIXI.Graphics();
+    this.addChild(this.liquidGra);
+  }
+
+  init() {
+    super.init();
   }
 
   drawLiquidGra() {
@@ -156,36 +185,56 @@ class TestTube extends Draggable {
 
     let rect = getAABB(globalAry);
 
-    let result = iterator(globalAry, rect, 1 / 3, 1);
+    let result = iterator(globalAry, rect, 100, 1);
 
     let pa = result[0];
     let pb = result[result.length - 1];
-    const divideSpaceResult = getDivideSpace(this.capacityVertex, pa, pb);
+    const divideSpaceResult = getDivideSpace(globalAry, pa, pb);
 
     // const lastVertex = divideSpaceResult.up;
 
     let vertex = divideSpaceResult.down;
 
-    const posAry = []
+    const posAry = [];
 
     for (let j = 0; j < vertex.length; j++) {
       let p = this.toLocal(vertex[j]);
       posAry.push(p);
     }
-    const gra = new PIXI.Graphics();
-    this.drawPolygon(gra, posAry, 0);
-    this.addChild(gra);
+    this.liquidGra.clear();
+    this.liquidGra.beginFill(0x86888b);
+    GraphicsUtils.drawLiquidPolygon(this.liquidGra, posAry, this.waveHeight);
+    this.liquidGra.alpha = 0.5;
+    this.liquidGra.endFill();
   }
 
-  drawPolygon(gra, vertex) {
-    for (let i = 0; i < vertex.length; i++) {
-      let p = vertex[i];
-      if (i == 0) {
-        gra.moveTo(p.x, p.y);
-      } else {
-        gra.lineTo(p.x, p.y);
-      }
+  update() {
+    super.update();
+    app.ticker.add((delta) => {
+        // this.particle.render(delta / 60);
+        if (this.capacityVertex) {
+            this.updateWave();
+            this.drawLiquidGra();
+        }
+    });
+  }
+
+  updateWave() {
+    if (this.maxWaveHeight === 0) this.maxWaveHeight = 20;
+    this.maxWaveHeight *= 0.99;
+    if (this.maxWaveHeight < 3) {
+      this.maxWaveHeight = 0;
     }
+    let v = this.waveHeight + 1 * this.waveDirection;
+    if (v > this.maxWaveHeight) {
+      v = this.maxWaveHeight;
+      this.waveDirection = -1;
+    } else if (v < -this.maxWaveHeight) {
+      v = -this.maxWaveHeight;
+      this.waveDirection = 1;
+    }
+
+    this.waveHeight = v;
   }
 
   /**
@@ -203,7 +252,7 @@ class TestTube extends Draggable {
       let globalAry = [];
       // 全局缩放
       for (let i = 0, length = oriAry.length; i < length; i++) {
-        let p = new Vector2(oriAry[i].x, oriAry[i].y);
+        let p = new Vector2(oriAry[i].get_x(), oriAry[i].get_y());
         globalAry.push(this.toGlobal(p));
       }
       this.globalAry = globalAry;
@@ -212,30 +261,11 @@ class TestTube extends Draggable {
       return [].concat(this.globalAry);
     }
   }
-
-  autoLightOn() {}
-
-  autoLightOff() {}
-
-  creationComplete() {
-    console.log("creationComplete");
-    eqLayer.addChild(this);
-    this.drawLiquidGra();
-    // this.head.visible = false;
-    // executeCmd(NBCommand.DRAG_COVER, {
-    //     container: this,
-    //     invert: false,
-    //     outter: true,
-    //     headCanCover: () => {
-    //         return false;
-    //     }
-    // });
-  }
 }
 
-module.exports = TestTube;
+module.exports = ChemContainer;
 
-},{"../pixi-util/PolygonUtil":7,"../pixi-util/geom/Vector2":8,"./Draggable":4}],4:[function(require,module,exports){
+},{"../pixi-util/PolygonUtil":8,"../pixi-util/geom/Vector2":9,"../utils/GraphicsUtils":10,"./Draggable":5}],5:[function(require,module,exports){
 class Draggable extends PIXI.Container {
     isDragging = false;
     offset = { x: 0, y: 0 };
@@ -252,6 +282,10 @@ class Draggable extends PIXI.Container {
             .on('pointerup', this.onDragEnd)
             .on('pointerupoutside', this.onDragEnd)
             .on('pointermove', this.onDragMove);
+    }
+
+    update() {
+        
     }
 
     onDragStart(event) {
@@ -281,7 +315,7 @@ class Draggable extends PIXI.Container {
 
 
 module.exports = Draggable
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){(function (){
 const AlcoholBurner = require('./AlcoholBurner')
 const ADropper = require('./ADropper')
@@ -295,7 +329,7 @@ const eqs = {
 global.eqs = eqs;
 module.exports = eqs;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ADropper":1,"./AlcoholBurner":2,"./BigTestTube":3}],6:[function(require,module,exports){
+},{"./ADropper":1,"./AlcoholBurner":2,"./BigTestTube":3}],7:[function(require,module,exports){
 /**
  *
  * Created by onlyjyf on 8/29/16.
@@ -386,7 +420,7 @@ LineUtil.containsPoint = function (p, a, b) {
 
 module.exports = LineUtil;
 
-},{"./geom/Vector2":8}],7:[function(require,module,exports){
+},{"./geom/Vector2":9}],8:[function(require,module,exports){
 /**
  * 多边形工具
  * 依赖nape.geom.Vec2,nb
@@ -1069,7 +1103,7 @@ PolygonUtil.rotatePoly = function (pointAry, rotate) {
 
 module.exports = PolygonUtil;
 
-},{"./LineUtil.js":6,"./geom/Vector2.js":8}],8:[function(require,module,exports){
+},{"./LineUtil.js":7,"./geom/Vector2.js":9}],9:[function(require,module,exports){
 /**
  *
  * Created by onlyjyf on 8/30/16.
@@ -1216,4 +1250,204 @@ class Vector2 {
 
 module.exports = Vector2;
 
-},{}]},{},[5]);
+},{}],10:[function(require,module,exports){
+class GraphicsUtils {
+    static draw(shape, ary) {
+        shape.lastMovePos = {
+            x: NaN,
+            y: NaN
+        };
+
+        // var debugCommands = "";
+
+        const moveTo = GraphicsUtils.__moveTo__;
+        while (ary.length) {
+            const dat = ary.pop();
+            let _x, _y, a, b, c;
+            if (dat === NBGraphicsCommand.MOVE_TO) {
+                _x = ary.pop();
+                _y = ary.pop();
+                moveTo(shape, _x, _y);
+                // if (flag) debugCommands += "g.moveTo(" + _x + "," + _y + ")\n";
+            } else if (dat === NBGraphicsCommand.LINE_TO) {
+                _x = ary.pop();
+                _y = ary.pop();
+                if (!(shape.lastMovePos.x === _x && shape.lastMovePos.y === _y)) {
+                    // debugCommands += "g.lineTo(" + _x + "," + _y + ")\n";
+                    shape.lineTo(_x, _y);
+                    shape.lastMovePos.x = _x;
+                    shape.lastMovePos.y = _y;
+                }
+            } else if (dat === NBGraphicsCommand.CURVO_TO) {
+                _x = ary.pop();
+                _y = ary.pop();
+                moveTo(shape, _x, _y);
+                // if (flag) debugCommands += "g.moveTo(" + _x + "," + _y + ")\n";
+                const cx = ary.pop();
+                const cy = ary.pop();
+                const ax = ary.pop();
+                const ay = ary.pop();
+                shape.lastMovePos.x = ax;
+                shape.lastMovePos.y = ay;
+                shape.quadraticCurveTo(cx, cy, ax, ay);
+                // debugCommands += "g.quadraticCurveTo(" + cx + "," + cy + "," + ax + "," + ay + ")\n";
+            } else if (dat === NBGraphicsCommand.LINE_STYLE) {
+                a = ary.pop();
+                b = ary.pop();
+                c = ary.pop();
+                shape.lineStyle(a, b, c);
+                // debugCommands += "g.lineStyle(" + a + "," + b + "," + c + ")\n";
+            } else if (dat === NBGraphicsCommand.BEGIN_FILL) {
+                a = ary.pop();
+                b = ary.pop();
+                shape.beginFill(a, b);
+                // debugCommands += "g.beginFill(" + a + "," + b + ")\n";
+            } else if (dat === NBGraphicsCommand.END_FILL) {
+                //shape.lastMovePos = {x:NaN, y:NaN};
+                shape.endFill();
+                // debugCommands += "g.endFill();\n";
+            }
+        }
+        //shape.debugCommands = debugCommands;
+        //console.log(debugCommands)
+    }
+
+    static __moveTo__(s, x, y) {
+        if (!(s.lastMovePos.x === x && s.lastMovePos.y === y)) {
+            s.moveTo(x, y);
+            s.lastMovePos.x = x;
+            s.lastMovePos.y = y;
+            return true;
+        }
+        return false;
+    }
+
+    static drawPolygon(gra, vertex) {
+        for (let i = 0; i < vertex.length; i++) {
+            const p = vertex[i];
+            if (i === 0) {
+                gra.moveTo(p.x, p.y);
+            } else {
+                gra.lineTo(p.x, p.y);
+            }
+        }
+    }
+
+    static drawLiquidPolygon(gra, vertex, waveHeight = 12, dltY = 0) {
+        let sideHeight = 0;
+        if (gra.parent && gra.parent.parent) {
+            sideHeight = 8 * Math.cos(gra.parent.parent.rotation);
+        }
+        if (sideHeight < 1) {
+            GraphicsUtils.drawPolygon(gra, vertex);
+            return;
+        }
+        if (!vertex[1]) {
+            return;
+        }
+        let p1 = gra.toGlobal(vertex[0]);
+        let p2 = gra.toGlobal(vertex[1]);
+        if (Math.abs(p1.y - p2.y) < 1) {
+            let v = vertex.shift();
+            vertex.push(v);
+        }
+        let len = vertex.length;
+        let startPoint = vertex[0];
+        let endPoint = vertex[len - 1];
+        let minY = startPoint.y > endPoint.y ? startPoint.y : endPoint.y;
+        let dx = startPoint.x - endPoint.x;
+        let dy = startPoint.y - endPoint.y;
+        let length = Math.sqrt(dx * dx + dy * dy);
+        let maxWaveHeight = length / 10;
+        waveHeight = waveHeight > maxWaveHeight ? maxWaveHeight : waveHeight;
+        let xz = dx / length;
+        let yz = dy / length;
+        let leftWidth = dx < 0 ? 1 : -1;
+        let maxY = -Infinity;
+        for (let i = 0; i < len; i++) {
+            let p = vertex[i];
+            if (p.y > maxY) {
+                maxY = p.y;
+            }
+        }
+        let disY = maxY - minY;
+        if (disY + dltY < sideHeight * 3) {
+            sideHeight = 0;
+        }
+        if (disY < sideHeight) {
+            sideHeight = (sideHeight + disY) / 2;
+        }
+        gra.moveTo(startPoint.x, startPoint.y - sideHeight);
+        for (let i = 0; i < len; i++) {
+            let p = vertex[i];
+            gra.lineTo(p.x, p.y);
+        }
+        gra.lineTo(endPoint.x, endPoint.y - sideHeight);
+        if (waveHeight === 0) {
+            let anchorLength = leftWidth * sideHeight;
+            let x = Math.abs(xz * anchorLength);
+            let y = Math.abs(yz * anchorLength);
+            gra.bezierCurveTo(endPoint.x + x, endPoint.y + y, startPoint.x - x, startPoint.y + y, startPoint.x, startPoint.y - sideHeight);
+        } else {
+            let amount = Math.ceil(Math.abs(length) / 100);
+            amount = amount < 2 ? 2 : amount;
+            let stepX = dx / amount / 2;
+            let stepY = dy / amount / 2;
+            let lastAnchorX = endPoint.x - leftWidth * sideHeight;
+            let lastAnchorY = endPoint.y;
+            let lastPointX = endPoint.x;
+            let lastPointY = endPoint.y;
+            let direction = 1;
+            for (let i = 0; i < amount - 1; i++) {
+                let middlePointX = lastPointX + stepX;
+                let middlePointY = lastPointY + stepY;
+                let newPointX = middlePointX + stepX;
+                let newPointY = middlePointY + stepY;
+                let newAnchorX = middlePointX + waveHeight * yz * direction;
+                let newAnchorY = middlePointY - waveHeight * xz * direction;
+                direction *= -1;
+                gra.bezierCurveTo(lastAnchorX, lastAnchorY, newAnchorX, newAnchorY, newPointX, newPointY);
+                lastAnchorX = newAnchorX + 2 * (newPointX - newAnchorX);
+                lastAnchorY = newAnchorY + 2 * (newPointY - newAnchorY);
+                lastPointX = newPointX;
+                lastPointY = newPointY;
+            }
+            gra.bezierCurveTo(lastAnchorX, lastAnchorY, startPoint.x + leftWidth * sideHeight, startPoint.y, startPoint.x, startPoint.y - sideHeight);
+            gra.endFill();
+        }
+    }
+
+    static dashTo(gra, point1, point2, space, globalScale) {
+        let dx = point2.x - point1.x;
+        let dy = point2.y - point1.y;
+        space = space > 0 ? space : 1;
+        space *= globalScale;
+        let distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)) * globalScale;
+        let total = distance / space / 2;
+        dx /= total * 2;
+        dy /= total * 2;
+        let currentP = Object.assign({}, point1);
+        for (let i = 0; i < total - 1; i++) {
+            gra.moveTo(currentP.x, currentP.y);
+            gra.lineTo(currentP.x += dx, currentP.y += dy);
+            currentP.x += dx;
+            currentP.y += dy;
+        }
+        gra.moveTo(currentP.x, currentP.y);
+        gra.lineTo(point2.x, point2.y);
+    }
+}
+
+const NBGraphicsCommand = {
+    MOVE_TO: 0x01,
+    LINE_TO: 0x02,
+    CURVO_TO: 0x03,
+    LINE_STYLE: 0x20,
+    BEGIN_FILL: 0x21,
+    END_FILL: 0xFF
+};
+
+// 导出 GraphicsUtils 类
+module.exports = GraphicsUtils;
+
+},{}]},{},[6]);

@@ -5,6 +5,23 @@
     <title>Chemical Lab</title>
   </head>
   <body>
+    <script>
+      function drawPolygon(points) {
+        const graphics = new PIXI.Graphics();
+
+        graphics.beginFill(0xFF0000);
+
+        graphics.moveTo(points[0].x, points[0].y);
+
+        for (let i = 1; i < points.length; i ++) {
+          graphics.lineTo(points[i].x, points[i].y);
+        }
+
+        graphics.endFill();
+
+        app.stage.addChild(graphics);
+      }
+    </script>
     <script src="./components/index-bundle.js"></script>
     <script src="./basic-util-bundle.js"></script>
     <!-- 使用特定版本的 PixiJS 和 pixi-particles -->

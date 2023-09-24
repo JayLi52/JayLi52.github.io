@@ -16,6 +16,10 @@ class Draggable extends PIXI.Container {
             .on('pointermove', this.onDragMove);
     }
 
+    update() {
+        
+    }
+
     onDragStart(event) {
         this.isDragging = true;
         this.offset.x = this.x - event.data.global.x;

@@ -69,9 +69,9 @@ app.stage.eqLayer = eqLayer;
 PIXI.loader.add("assets/skin.json").load(() => {
   app.stage.addChild(particleLayer);
   app.stage.addChild(eqLayer);
-  createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
   createEquipment('assets/assist/ADropper', 'container', eqs.ADropper).update();
-  createEquipment('assets/container/BigTestTube', 'container', eqs.BigTestTube).update();
+  window.testTueb = createEquipment('assets/container/BigTestTube', 'container', eqs.BigTestTube).update();
+  createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
 });
 
 const map = {
