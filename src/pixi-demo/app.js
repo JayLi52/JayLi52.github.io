@@ -92,6 +92,8 @@ PIXI.loader.add("assets/skin.json").load(() => {
   window.drip = createEquipment('assets/assist/ADropper', 'container', eqs.ADropper).update();
   window.testTueb = createEquipment('assets/container/BigTestTube', 'container', eqs.BigTestTube).update();
   window.xxx = createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
+  window.x = createEquipment('assets/assist/Forceps', 'container', eqs.Forceps).update();
+  createEquipment('assets/container/RoundBottomFlask', 'container', eqs.RoundBottomFlask).update();
 });
 
 const map = {

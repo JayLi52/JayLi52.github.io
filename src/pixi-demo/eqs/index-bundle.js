@@ -908,7 +908,7 @@ module.exports = GraphicsUtils;
 
 },{}]},{},[1]);
 
-},{"./display/MovieClip":2,"./utils/GraphicsUtils.js":12}],2:[function(require,module,exports){
+},{"./display/MovieClip":2,"./utils/GraphicsUtils.js":14}],2:[function(require,module,exports){
 const nb = window.nb;
 /**
  *
@@ -1305,7 +1305,7 @@ class AlcoholBurner extends Draggable {
 
 module.exports = AlcoholBurner;
 
-},{"../basic-util-bundle":1,"../pixi-util/PolygonUtil":10,"./Draggable":7}],5:[function(require,module,exports){
+},{"../basic-util-bundle":1,"../pixi-util/PolygonUtil":12,"./Draggable":7}],5:[function(require,module,exports){
 const ChemContainer = require("./ChemContainer");
 
 class TestTube extends ChemContainer {
@@ -1456,7 +1456,7 @@ class ChemContainer extends Draggable {
 
 module.exports = ChemContainer;
 
-},{"../pixi-util/PolygonUtil":10,"../pixi-util/geom/Vector2":11,"../utils/GraphicsUtils":12,"./Draggable":7}],7:[function(require,module,exports){
+},{"../pixi-util/PolygonUtil":12,"../pixi-util/geom/Vector2":13,"../utils/GraphicsUtils":14,"./Draggable":7}],7:[function(require,module,exports){
 class Draggable extends PIXI.Container {
     isDragging = false;
     offset = { x: 0, y: 0 };
@@ -1507,20 +1507,156 @@ class Draggable extends PIXI.Container {
 
 module.exports = Draggable
 },{}],8:[function(require,module,exports){
+const Draggable = require("./Draggable");
+
+class Forceps extends Draggable {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.x = 1080;
+    this.y = 300;
+    this.rotation = -Math.PI / 6;
+    // this.alpha = 0.2;
+    // this.color = 0x343941;
+    // this.scale.x = 0.7
+    // this.scale.y = 0.7
+
+    // this.matrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0];
+    // this.colorMatrix = new PIXI.filters.ColorMatrixFilter();
+    // this.colorMatrix.matrix = this.matrix;
+    // this.filters = [this.colorMatrix];
+    // this.children[0].alpha = 0.2
+    super.init();
+  }
+
+  update() {
+    // let speed = 0;
+    // let setV = false;
+    // app.ticker.add((delta) => {
+    //   speed += delta * 0.15;
+    //   this.y += speed * delta;
+    //   if (this.y > 3800) {
+    //     speed = 0;
+    //     this.y = 300;
+    //     this.visible = true;
+    //   }
+    //   if (this.children[0] && !setV) {
+    //     this.children[0].alpha = 0.2;
+    //     setV = true;
+    //   }
+    // });
+    return this;
+  }
+
+  autoLightOn() {}
+
+  autoLightOff() {}
+
+  creationComplete() {
+    console.log("creationComplete");
+    eqLayer.addChild(this);
+    // this.head.visible = false;
+    // executeCmd(NBCommand.DRAG_COVER, {
+    //     container: this,
+    //     invert: false,
+    //     outter: true,
+    //     headCanCover: () => {
+    //         return false;
+    //     }
+    // });
+  }
+}
+
+module.exports = Forceps;
+
+},{"./Draggable":7}],9:[function(require,module,exports){
+const Draggable = require("./Draggable");
+
+class RoundBottomFlask extends Draggable {
+  constructor() {
+    super();
+    this.init();
+  }
+
+  init() {
+    this.x = 880;
+    this.y = 300;
+    // this.rotation = -Math.PI / 6;
+    // this.alpha = 0.2;
+    // this.color = 0x343941;
+    // this.scale.x = 0.7
+    // this.scale.y = 0.7
+
+    // this.matrix = [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0];
+    // this.colorMatrix = new PIXI.filters.ColorMatrixFilter();
+    // this.colorMatrix.matrix = this.matrix;
+    // this.filters = [this.colorMatrix];
+    // this.children[0].alpha = 0.2
+    super.init();
+  }
+
+  update() {
+    // let speed = 0;
+    // let setV = false;
+    // app.ticker.add((delta) => {
+    //   speed += delta * 0.15;
+    //   this.y += speed * delta;
+    //   if (this.y > 3800) {
+    //     speed = 0;
+    //     this.y = 300;
+    //     this.visible = true;
+    //   }
+    //   if (this.children[0] && !setV) {
+    //     this.children[0].alpha = 0.2;
+    //     setV = true;
+    //   }
+    // });
+    return this;
+  }
+
+  autoLightOn() {}
+
+  autoLightOff() {}
+
+  creationComplete() {
+    console.log("creationComplete");
+    eqLayer.addChild(this);
+    // this.head.visible = false;
+    // executeCmd(NBCommand.DRAG_COVER, {
+    //     container: this,
+    //     invert: false,
+    //     outter: true,
+    //     headCanCover: () => {
+    //         return false;
+    //     }
+    // });
+  }
+}
+
+module.exports = RoundBottomFlask;
+
+},{"./Draggable":7}],10:[function(require,module,exports){
 (function (global){(function (){
 const AlcoholBurner = require('./AlcoholBurner')
 const ADropper = require('./ADropper')
 const BigTestTube = require('./BigTestTube')
+const Forceps = require('./Forceps')
+const RoundBottomFlask = require('./RoundBottomFlask')
 
 const eqs = {
     AlcoholBurner,
     ADropper,
     BigTestTube,
+    Forceps,
+    RoundBottomFlask,
 }
 global.eqs = eqs;
 module.exports = eqs;
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ADropper":3,"./AlcoholBurner":4,"./BigTestTube":5}],9:[function(require,module,exports){
+},{"./ADropper":3,"./AlcoholBurner":4,"./BigTestTube":5,"./Forceps":8,"./RoundBottomFlask":9}],11:[function(require,module,exports){
 /**
  *
  * Created by onlyjyf on 8/29/16.
@@ -1611,7 +1747,7 @@ LineUtil.containsPoint = function (p, a, b) {
 
 module.exports = LineUtil;
 
-},{"./geom/Vector2":11}],10:[function(require,module,exports){
+},{"./geom/Vector2":13}],12:[function(require,module,exports){
 /**
  * 多边形工具
  * 依赖nape.geom.Vec2,nb
@@ -2294,7 +2430,7 @@ PolygonUtil.rotatePoly = function (pointAry, rotate) {
 
 module.exports = PolygonUtil;
 
-},{"./LineUtil.js":9,"./geom/Vector2.js":11}],11:[function(require,module,exports){
+},{"./LineUtil.js":11,"./geom/Vector2.js":13}],13:[function(require,module,exports){
 /**
  *
  * Created by onlyjyf on 8/30/16.
@@ -2441,7 +2577,7 @@ class Vector2 {
 
 module.exports = Vector2;
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 class GraphicsUtils {
     static draw(shape, ary) {
         shape.lastMovePos = {
@@ -2641,4 +2777,4 @@ const NBGraphicsCommand = {
 // 导出 GraphicsUtils 类
 module.exports = GraphicsUtils;
 
-},{}]},{},[8]);
+},{}]},{},[10]);
