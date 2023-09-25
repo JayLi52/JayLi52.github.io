@@ -14,6 +14,15 @@ class TestTube extends ChemContainer {
 
   update() {
     super.update();
+    app.ticker.add((delta) => {
+      if (testTueb.liquidGra.hitTest(drip)) {
+        if (drip.visible) {
+          drip.visible = false;
+          this.maxWaveHeight = 20;
+        }
+      }
+    });
+    return this
   }
 
   creationComplete() {

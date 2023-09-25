@@ -1,3 +1,5 @@
+const GraphicsUtils = require("../basic-util-bundle");
+const { getAABB } = require("../pixi-util/PolygonUtil");
 const Draggable = require("./Draggable");
 
 class AlcoholBurner extends Draggable {
@@ -15,8 +17,8 @@ class AlcoholBurner extends Draggable {
             this.particle.visible = true;
         }
 
-        this.x = 300;
-        this.y = 300;
+        this.x = 595;
+        this.y = 1059;
         super.init();
     }
 
@@ -25,9 +27,55 @@ class AlcoholBurner extends Draggable {
             // this.particle.render(dt);
             app.ticker.add((delta) => {
                 this.particle.render(delta / 60);
+                this.modifyParticles();
             });
             this.checkParticleColl();
         }
+        return this
+    }
+
+    modifyParticles() {
+        // const maxY = 1200;// 容器水平的最低点
+        if (!testTueb || !testTueb.rect) return;
+        let y = testTueb.rect.y + testTueb.rect.height;
+        let x = testTueb.rect.x + testTueb.rect.width / 2;
+        y = this.toLocal(new PIXI.Point(x, y), app.stage).y + 130;
+        // console.log(y)
+        const modifyPosFunc = (pos) => {
+            let shouldY = pos.y
+            let changed = false;
+            let shouldX = pos.x;
+            if (shouldY < y) {
+                changed = true;
+                shouldX += (Math.random() - .5) * 30;
+                shouldY = y;
+            }
+            return {
+                x: shouldX,
+                y: shouldY,
+                changed: changed
+            };
+        };
+
+        // this.particle.children.length
+
+        const px = this.toGlobal(this.particle).x
+        for (let i = 0; i < this.particle.children.length; i++) {
+            let p = this.particle.children[i];
+            // console.log(p.position)
+            if (Math.abs(px - testTueb.x) < 30) {
+                let pos = modifyPosFunc(p.position);
+                if (pos.changed) {
+                    // pos = c.toLocal(pos);
+                    p.x = pos.x;
+                    p.y = pos.y;
+                    // count++;
+                }
+            }
+        }
+
+
+
     }
 
     checkParticleColl() {

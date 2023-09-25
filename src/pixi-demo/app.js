@@ -66,12 +66,32 @@ eqLayer.y = 0;
 
 app.stage.eqLayer = eqLayer;
 
+// 初始化舞台缩放属性
+// let stageScale = 1;
+
+// // 监听鼠标滚轮事件
+// app.view.addEventListener("wheel", (event) => {
+//   // 计算滚轮事件的 deltaY，根据滚动方向进行缩放
+//   const deltaY = event.deltaY;
+//   if (deltaY > 0) {
+//     stageScale *= 0.9; // 缩小舞台
+//   } else {
+//     stageScale *= 1.1; // 放大舞台
+//   }
+
+//   // 限制舞台的最大和最小缩放值
+//   stageScale = Math.min(Math.max(0.5, stageScale), 10);
+
+//   // 更新舞台的缩放属性
+//   app.stage.scale.set(stageScale);
+// });
+
 PIXI.loader.add("assets/skin.json").load(() => {
   app.stage.addChild(particleLayer);
   app.stage.addChild(eqLayer);
-  createEquipment('assets/assist/ADropper', 'container', eqs.ADropper).update();
+  window.drip = createEquipment('assets/assist/ADropper', 'container', eqs.ADropper).update();
   window.testTueb = createEquipment('assets/container/BigTestTube', 'container', eqs.BigTestTube).update();
-  createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
+  window.xxx = createEquipment('assets/assist/AlcoholBurner', 'container', eqs.AlcoholBurner).update();
 });
 
 const map = {

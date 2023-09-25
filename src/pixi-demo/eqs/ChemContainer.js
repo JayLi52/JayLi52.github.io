@@ -29,6 +29,8 @@ class ChemContainer extends Draggable {
 
     let rect = getAABB(globalAry);
 
+    this.rect = rect;
+
     let result = iterator(globalAry, rect, 100, 1);
 
     let pa = result[0];
