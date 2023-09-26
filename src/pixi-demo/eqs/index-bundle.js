@@ -1641,7 +1641,7 @@ module.exports = RoundBottomFlask;
 },{"./Draggable":7}],10:[function(require,module,exports){
 (function (global){(function (){
 const AlcoholBurner = require('./AlcoholBurner')
-const ADropper = require('./Drip.js')
+const ADropper = require('./ADropper')
 const BigTestTube = require('./BigTestTube')
 const Forceps = require('./Forceps')
 const RoundBottomFlask = require('./RoundBottomFlask')

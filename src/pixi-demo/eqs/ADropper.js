@@ -1,6 +1,6 @@
 const Draggable = require("./Draggable");
 
-class Drip extends Draggable {
+class ADropper extends Draggable {
   constructor() {
     super();
     this.init();
@@ -60,4 +60,4 @@ class Drip extends Draggable {
   }
 }
 
-module.exports = Drip;
+module.exports = ADropper;

@@ -1,12 +1,12 @@
 const AlcoholBurner = require('./AlcoholBurner')
-const Drip = require('./Drip')
+const ADropper = require('./ADropper')
 const BigTestTube = require('./BigTestTube')
 const Forceps = require('./Forceps')
 const RoundBottomFlask = require('./RoundBottomFlask')
 
 const eqs = {
     AlcoholBurner,
-    Drip,
+    ADropper,
     BigTestTube,
     Forceps,
     RoundBottomFlask,
