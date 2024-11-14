@@ -8,14 +8,21 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
+camera.position.z = 5; // 设置相机距离
+
 const renderer = new THREE.WebGLRenderer({
   antialias: true
 });
-renderer.setClearColor(0xff5555);
+
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load('./imgs/milky2.jpg', function(texture) {
+  scene.background = texture;
+});
+// renderer.setClearColor(0xff5555);
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-camera.position.z = 1;
+// camera.position.z = 1;
 
 const controls = new THREE.TrackballControls(camera, renderer.domElement);
 controls.noPan = true;
@@ -24,6 +31,43 @@ controls.minDistance = 0.7;
 
 const group = new THREE.Group();
 scene.add(group);
+
+// 创建画布来绘制文字
+const canvas = document.createElement('canvas');
+const context = canvas.getContext('2d');
+canvas.width = 1024;
+canvas.height = 512;
+
+// 设置文字样式
+context.fillStyle = '#FFFFCC'; // 文字颜色
+context.font = '48px Arial'; // 字体和大小
+context.textAlign = 'left';
+
+// 将文本内容按行分割
+const text = '段段:\n三千回愛してる\nlove you three thousand\n당신을 3000번 사랑해요';
+const textLines = text.split('\n');
+
+// 绘制每一行文字
+const lineHeight = 90; // 设置行高
+let y = 50; // 初始 y 坐标
+
+textLines.forEach(line => {
+  context.fillText(line, 50, y);
+  y += lineHeight; // 每次绘制后，将 y 坐标增加行高
+});
+
+// 使用 CanvasTexture 将文字作为纹理
+const texture = new THREE.CanvasTexture(canvas);
+const textMaterial = new THREE.SpriteMaterial({ map: texture });
+
+// 创建 Sprite 并添加到场景中
+const textSprite = new THREE.Sprite(textMaterial);
+textSprite.scale.set(10, 5, 1); // 调整文字的大小比例
+textSprite.position.set(-6, 3, -5); // 设置文字位置
+// textSprite.position.set(-window.innerWidth / window.innerHeight * camera.position.z, camera.position.z, -5);
+
+scene.add(textSprite);
+
 
 let heart = null;
 let heart2 = null;
@@ -43,10 +87,10 @@ new THREE.OBJLoader().load('https://assets.codepen.io/127738/heart_2.obj',obj =>
   // group.add(heart2);
 
   // 创建纹理加载器
-const textureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader();
 
-// 加载星空图片
-const starTexture = textureLoader.load('./imgs/milky.jpg');
+  // 加载星空图片
+  const starTexture = textureLoader.load('./imgs/duan.jpg');
 
 // 将纹理应用到材质
 // const material = new THREE.MeshBasicMaterial({
