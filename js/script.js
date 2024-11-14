@@ -26,6 +26,7 @@ const group = new THREE.Group();
 scene.add(group);
 
 let heart = null;
+let heart2 = null;
 let sampler = null;
 let originHeart = null;
 new THREE.OBJLoader().load('https://assets.codepen.io/127738/heart_2.obj',obj => {
@@ -33,11 +34,29 @@ new THREE.OBJLoader().load('https://assets.codepen.io/127738/heart_2.obj',obj =>
   heart.geometry.rotateX(-Math.PI * 0.5);
   heart.geometry.scale(0.04, 0.04, 0.04);
   heart.geometry.translate(0, -0.4, 0);
+
+  // heart2 = obj.children[0];
+  // heart2.geometry.rotateX(-Math.PI * 0.5);
+  // heart2.geometry.scale(0.02, 0.02, 0.02);
+  // heart2.geometry.translate(0, 0, 0);
   group.add(heart);
+  // group.add(heart2);
+
+  // 创建纹理加载器
+const textureLoader = new THREE.TextureLoader();
+
+// 加载星空图片
+const starTexture = textureLoader.load('./imgs/milky.jpg');
+
+// 将纹理应用到材质
+// const material = new THREE.MeshBasicMaterial({
+//   map: starTexture
+// });
   
   heart.material = new THREE.MeshBasicMaterial({
-    color: 0xff5555    
+    map: starTexture
   });
+
   originHeart = Array.from(heart.geometry.attributes.position.array);
   sampler = new THREE.MeshSurfaceSampler(heart).build();
   init();
