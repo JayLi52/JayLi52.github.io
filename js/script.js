@@ -1,4 +1,4 @@
-console.clear();
+// console.clear();
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
@@ -17,6 +17,12 @@ const renderer = new THREE.WebGLRenderer({
 const textureLoader = new THREE.TextureLoader();
 textureLoader.load('./imgs/milky2.jpg', function(texture) {
   scene.background = texture;
+}, function (progress) {
+  const percentComplete = (progress.loaded / progress.total) * 100;
+  console.log(`Texture load progress: ${Math.round(percentComplete)}%`);
+},
+function (error) {
+  console.error('Error loading texture:', error);
 });
 // renderer.setClearColor(0xff5555);
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -113,7 +119,7 @@ const material = new THREE.LineBasicMaterial({
   color: 0xffffff
 });
 const lines = new THREE.LineSegments(geometry, material);
-group.add(lines);
+// group.add(lines);
 
 const simplex = new SimplexNoise();
 const pos = new THREE.Vector3();
