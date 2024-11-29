@@ -19,3 +19,4 @@
 - vite react tailwind css
 - vite public path
 - react router
+- hash 路由模式

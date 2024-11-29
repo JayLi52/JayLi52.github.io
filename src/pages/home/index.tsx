@@ -84,7 +84,7 @@ const Main = () => (
                     '碰到障碍物 GameOver / R重置游戏',
                 ]}
                 icon={ballAvif}
-                links={[{ href: '/src/unity-game/', text: 'View demo...' }]}
+                links={[{ href: '/sub-project/unity-game/', text: 'View demo...' }]}
             />
             <HomeCard
                 title="Unity Game"
@@ -94,7 +94,7 @@ const Main = () => (
                     '左右控制 / 空格跳跃 / idle、run、jump帧动画 / 刚体设置',
                 ]}
                 icon={ninjaGirlPng}
-                links={[{ href: '/src/NinjaGirl/', text: 'View demo...' }]}
+                links={[{ href: '/sub-project/NinjaGirl/', text: 'View demo...' }]}
             />
 
             <h2 className="text-3xl font-serif italic font-bold mt-8">Graphics</h2>
@@ -103,7 +103,7 @@ const Main = () => (
                 time="2022"
                 description="This project was an experiment in realtime water rendering with WebGL..."
                 icon={webglWaterThumb}
-                links={[{ href: '/src/webgl-water', text: 'View demo...' }]}
+                links={[{ href: '/sub-project/webgl-water', text: 'View demo...' }]}
             />
             <HomeCard
                 title="Shader Toy Example"
@@ -123,8 +123,7 @@ const Main = () => (
                 description="Effects related to physical and chemical experiments"
                 icon={pixiLogoSvg}
                 links={[
-                    { href: 'src/pixi-demo/index.html', text: 'View demo...' },
-                    { href: 'src/spring/src/index.html', text: 'View demo...' },
+                    { href: '/sub-project/pixi-demo/index.html', text: 'View demo...' },
                 ]}
             />
 
