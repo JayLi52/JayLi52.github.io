@@ -10,8 +10,8 @@ function builtinRead(x: string) {
 
 const App: React.FC = () => {
     const [code, setCode] = useState<string>(pyCode);
-    const [language, setLanguage] = useState<string>('python');
-    const [theme, setTheme] = useState<string>('vs-light');
+    const [language] = useState<string>('python');
+    const [theme] = useState<string>('vs-light');
     const [output, setOutput] = useState<string>(''); // 存储输出内容
     const [loading, setLoading] = useState<boolean>(false); // 存储输出内容
     // React 中实现的输出函数
