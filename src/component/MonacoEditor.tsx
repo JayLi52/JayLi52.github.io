@@ -54,6 +54,16 @@ const MonacoEditor: React.FC<MonacoEditorProps> = ({
     }
   }, [language, theme]);
 
+  // 响应外部 value 变化
+  useEffect(() => {
+    if (monacoInstanceRef.current && value !== undefined) {
+      const model = monacoInstanceRef.current.getModel();
+      if (model && model.getValue() !== value) {
+        model.setValue(value); // 更新编辑器内容
+      }
+    }
+  }, [value]);
+
   return <div ref={editorRef} style={{ width: '100%', height: '100%' }} />;
 };
 
