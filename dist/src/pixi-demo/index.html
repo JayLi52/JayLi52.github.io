@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>
+        ChemicalLibs
+        -
+        Demo</title>
+    <style>
+        {
+            moz-user-select: -moz-none;
+            -moz-user-select: none;
+            -o-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+    </style>
+    <!--<meta name="cdnhost" content="">-->
+    <script src="current-device.min.js"></script>
+    <script>
+        window.global = window.global || window;
+
+    </script>
+    <script src="default-passive-events.js"></script>
+    <link rel="stylesheet" href="index.css" />
+    <script src="md5.js"></script>
+    <script src="assets/dependJS/keyboard.js"></script>
+    <script src="assets/dependJS/nb-phy.js"></script>
+    <script src="assets/dependJS/pixi-bin.js"></script>
+    <script src="assets/dependJS/pixi-particles.js"></script>
+    <script src="assets/dependJS/TweenMax.min.js"></script>
+    <script src="assets/dependJS/soundjs-0.6.1.js"></script>
+    <script src="assets/dependJS/jquery-3.2.1.min.js"></script>
+    <script src="assets/dependJS/jquery.mousewheel.js"></script>
+    <script src="nobook_chemical.min.js"></script>
+    <script src="index.js"></script>
+</head>
+
+<body ondragstart="return false">
+    <div id="boxId">
+        <canvas id="canvas" class="canvas-cla"></canvas>
+    </div>
+    <div id="headId" class="head-cla">
+        <div class="head-div" onclick="setGrade(2)">初中</div>
+        <div class="head-div" onclick="setGrade(3)">高中</div>
+        <div class="head-div" onclick="getData()">获取实验数据</div>
+        <div class="head-div" onclick="toggleDebug()">切换调试模式</div>
+        <div class="head-div" onclick="toggleShowAllEqs()">切换显示所有器材</div>
+      </div>
+    <div id="listDiv">
+        <div id="search">
+            <input class="search-ipt" placeholder="搜索" oninput="search(this.value)" />
+        </div>
+        <div id="eqLib">
+        </div>
+        <div class="tab" id="tab">
+            <div class="tab-item" onclick="showEqLibByType(0)">
+                <img class="default" src="images/calcu.png">
+                <img class="selected" src="images/calcu_selected.png">
+                <div class="tab-text">反应器材</div>
+            </div>
+            <div class="tab-item" onclick="showEqLibByType(1)">
+                <img class="default" src="images/assist.png">
+                <img class="selected" src="images/assist_selected.png">
+                <div class="tab-text">辅助器材</div>
+            </div>
+            <div class="tab-item" onclick="showEqLibByType(2)">
+                <img class="default" src="images/solid.png">
+                <img class="selected" src="images/solid_selected.png">
+                <div class="tab-text">固体药品</div>
+            </div>
+            <div class="tab-item" onclick="showEqLibByType(3)">
+                <img class="default" src="images/liquid.png">
+                <img class="selected" src="images/liquid_selected.png">
+                <div class="tab-text">液体药品</div>
+            </div>
+            <div class="tab-item" onclick="showEqLibByType(4)">
+                <img class="default" src="images/gas.png">
+                <img class="selected" src="images/gas_selected.png">
+                <div class="tab-text">气体药品</div>
+            </div>
+            <div class="tab-item" onclick="showEqLibByType(5)">
+                <img class="default" src="images/assemble.png">
+                <img class="selected" src="images/assemble_selected.png">
+                <div class="tab-text">组合实验</div>
+            </div>
+            <div class="tab-item tab-item-toggle" onclick="toggleEqLib()">
+                <div class="toggle-icon"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
