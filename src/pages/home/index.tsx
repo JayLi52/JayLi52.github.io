@@ -145,7 +145,7 @@ const Main = () => (
                     'Online file system',
                 ]}
                 icon={editor}
-                links={[{ href: '/src/python-editor/', text: 'View demo...' }]}
+                links={[{ href: '/dist/editor/', text: 'View demo...' }]}
             />
         </section>
     </main>

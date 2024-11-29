@@ -12,3 +12,10 @@
 ## go
 
 ## rust
+
+
+## feature
+- github CI CD
+- vite react tailwind css
+- vite public path
+- react router
