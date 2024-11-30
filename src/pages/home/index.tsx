@@ -5,6 +5,7 @@ import shaderExamplePng from '@/assets/shader-example.png';
 import pixiLogoSvg from '@/assets/pixi-logo.svg';
 import bgDark from '@/assets/bg-dark.jpg';
 import editor from '@/assets/editor.png';
+import waterMonitor from '@/assets/water-monitor.png'
 
 // HomeCard component
 const HomeCard = ({ title, time, description, links = [], icon }: any) => (
@@ -65,7 +66,7 @@ const Header = () => (
     >
         <section className="text-center py-16 text-white">
             <h1 className="text-4xl md:text-6xl font-serif italic font-bold">
-                Li Yongjie
+                Li Yongjie'Projects
             </h1>
         </section>
     </header>
@@ -75,29 +76,27 @@ const Header = () => (
 const Main = () => (
     <main className="px-6 md:px-12">
         <section>
-            <h2 className="text-3xl font-serif italic font-bold mt-8">Unity</h2>
+        <h2 className="text-3xl font-serif italic font-bold mt-8">Editor</h2>
             <HomeCard
-                title="Unity Game"
-                time="2023"
+                title="Python Editor"
+                time="2021"
                 description={[
-                    '滚球跑酷游戏',
-                    '碰到障碍物 GameOver / R重置游戏',
+                    'Python editing, running',
+                    'Implement Python syntax: lists, tuples, dictionaries, etc., modularization, etc.',
+                    'Web Assembly(Pyodide) vs JS compiler(Skulpt)'
                 ]}
-                icon={ballAvif}
-                links={[{ href: '/sub-project/unity-game/', text: 'View demo...' }]}
+                icon={editor}
+                links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
             />
-            <HomeCard
-                title="Unity Game"
-                time="2023"
-                description={[
-                    'NinjaGirl - 忍者女孩',
-                    '左右控制 / 空格跳跃 / idle、run、jump帧动画 / 刚体设置',
-                ]}
-                icon={ninjaGirlPng}
-                links={[{ href: '/sub-project/NinjaGirl/', text: 'View demo...' }]}
-            />
-
+            
             <h2 className="text-3xl font-serif italic font-bold mt-8">Graphics</h2>
+            <HomeCard
+                title="水质监控 数据可视化"
+                time="2023"
+                description="Echarts、图形学、Canvas"
+                icon={waterMonitor}
+                links={[{ href: '/sub-project/webgl-water', text: 'View demo...' }]}
+            />
             <HomeCard
                 title="WebGL Water"
                 time="2022"
@@ -127,25 +126,41 @@ const Main = () => (
                 ]}
             />
 
-            <h2 className="text-3xl font-serif italic font-bold mt-8">Studying Notes</h2>
-            <p>
-                <a href="https://www.yuque.com/songguo-jhekj">View yuque...</a>
-            </p>
-
-            <h2 className="text-3xl font-serif italic font-bold mt-8">Editor</h2>
+<h2 className="text-3xl font-serif italic font-bold mt-8">Unity</h2>
             <HomeCard
-                title="Python Editor"
-                time="2021"
+                title="Unity Game"
+                time="2023"
                 description={[
-                    'Python editing, running, and debugging capabilities',
-                    'Implement Python syntax: lists, tuples, dictionaries, etc., modularization, etc.',
-                    'Multiple themes and font customization',
-                    'Support Electron and Web environment',
-                    'Online file system',
+                    '滚球跑酷游戏',
+                    '碰到障碍物 GameOver / R重置游戏',
                 ]}
-                icon={editor}
-                links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
+                icon={ballAvif}
+                links={[{ href: '/sub-project/unity-game/', text: 'View demo...' }]}
             />
+            <HomeCard
+                title="Unity Game"
+                time="2023"
+                description={[
+                    'NinjaGirl - 忍者女孩',
+                    '左右控制 / 空格跳跃 / idle、run、jump帧动画 / 刚体设置',
+                ]}
+                icon={ninjaGirlPng}
+                links={[{ href: '/sub-project/NinjaGirl/', text: 'View demo...' }]}
+            />
+
+
+            {/* <h2 className="text-3xl font-serif italic font-bold mt-8">Backend</h2>
+            <HomeCard
+                title="PixiJS Example"
+                time="2023"
+                description="Effects related to physical and chemical experiments"
+                icon={pixiLogoSvg}
+                links={[
+                    { href: '/sub-project/pixi-demo/index.html', text: 'View demo...' },
+                ]}
+            /> */}
+
+            
         </section>
     </main>
 );
