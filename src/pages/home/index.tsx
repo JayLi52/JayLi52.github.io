@@ -76,7 +76,21 @@ const Header = () => (
 const Main = () => (
     <main className="px-6 md:px-12">
         <section>
-        <h2 className="text-3xl font-serif italic font-bold mt-8">Editor</h2>
+
+            <h2 className="text-3xl font-serif italic font-bold mt-8">Professional Skill</h2>
+            <HomeCard
+                title=""
+                time="2019-present"
+                description={[
+                    '渲染框架: React Vue，构建工具：webpack、vite',
+                    '计算机图形学: Canvas、WebGl、threejs',
+                    '后端开发: Go、Java、Rust',
+                    '端开发: Electron、ReactNative'
+                ]}
+                icon={editor}
+            // links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
+            />
+            <h2 className="text-3xl font-serif italic font-bold mt-8">Editor</h2>
             <HomeCard
                 title="Python Editor"
                 time="2021"
@@ -88,7 +102,7 @@ const Main = () => (
                 icon={editor}
                 links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
             />
-            
+
             <h2 className="text-3xl font-serif italic font-bold mt-8">Graphics</h2>
             <HomeCard
                 title="水质监控 数据可视化"
@@ -126,7 +140,7 @@ const Main = () => (
                 ]}
             />
 
-<h2 className="text-3xl font-serif italic font-bold mt-8">Unity</h2>
+            <h2 className="text-3xl font-serif italic font-bold mt-8">Unity</h2>
             <HomeCard
                 title="Unity Game"
                 time="2023"
@@ -149,18 +163,40 @@ const Main = () => (
             />
 
 
-            {/* <h2 className="text-3xl font-serif italic font-bold mt-8">Backend</h2>
+            <h2 className="text-3xl font-serif italic font-bold mt-8">Backend</h2>
             <HomeCard
-                title="PixiJS Example"
-                time="2023"
-                description="Effects related to physical and chemical experiments"
+                title="持续更新中"
+                time="2024"
+                description="......"
                 icon={pixiLogoSvg}
                 links={[
                     { href: '/sub-project/pixi-demo/index.html', text: 'View demo...' },
                 ]}
-            /> */}
+            />
 
-            
+            <h2 className="text-3xl font-serif italic font-bold mt-8">Chrome extension</h2>
+            <HomeCard
+                title="持续更新中"
+                time="2024"
+                description="......"
+                icon={pixiLogoSvg}
+                links={[
+                    { href: '/sub-project/pixi-demo/index.html', text: 'View demo...' },
+                ]}
+            />
+
+            <h2 className="text-3xl font-serif italic font-bold mt-8">vscode extension</h2>
+            <HomeCard
+                title="持续更新中"
+                time="2024"
+                description="......"
+                icon={pixiLogoSvg}
+                links={[
+                    { href: '/sub-project/pixi-demo/index.html', text: 'View demo...' },
+                ]}
+            />
+
+
         </section>
     </main>
 );
