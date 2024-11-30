@@ -109,7 +109,7 @@ const Main = () => (
                 time="2023"
                 description="Echarts、图形学、Canvas"
                 icon={waterMonitor}
-                links={[{ href: '/sub-project/webgl-water', text: 'View demo...' }]}
+                links={[{ href: '/sub-project/water-monitor', text: 'View demo...' }]}
             />
             <HomeCard
                 title="WebGL Water"
