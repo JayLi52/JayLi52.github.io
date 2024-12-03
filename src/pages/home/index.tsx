@@ -6,6 +6,7 @@ import pixiLogoSvg from '@/assets/pixi-logo.svg';
 import bgDark from '@/assets/bg-dark.jpg';
 import editor from '@/assets/editor.png';
 import waterMonitor from '@/assets/water-monitor.png'
+import wxAppletUnshell from '@/assets/wxAppletUnshell.png'
 
 // HomeCard component
 const HomeCard = ({ title, time, description, links = [], icon }: any) => (
@@ -101,6 +102,18 @@ const Main = () => (
                 ]}
                 icon={editor}
                 links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
+            />
+
+            <h2 className="text-3xl font-serif italic font-bold mt-8">小程序逆向</h2>
+            <HomeCard
+                title="Python Editor"
+                time="2021"
+                description={[
+                    '花店 - 微信小程序逆向',
+                    'wux1an/wxapkg by go & unshell wxApplet',
+                ]}
+                icon={wxAppletUnshell}
+                links={[{ href: 'https://github.com/JayLi52/JayLi52.github.io/tree/unshell-applet/wx0f4b53093925ec0a', text: 'View demo...' }]}
             />
 
             <h2 className="text-3xl font-serif italic font-bold mt-8">Graphics</h2>
