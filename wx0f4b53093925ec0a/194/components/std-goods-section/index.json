@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "std-mall-brand-info": "/components/std-mall-brand-info/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

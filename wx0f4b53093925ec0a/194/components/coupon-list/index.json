@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-popup": "/components/popup/index",
+    "coupon-desc": "/components/coupon-item-desc/index",
+    "coupon-item-info": "/components/coupon-item-info/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

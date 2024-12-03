@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "popup-share": "/components/goods-action/components/popup-share/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

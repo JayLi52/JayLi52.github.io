@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-popup": "/components/popup/index",
+    "empty-image": "/components/empty-image/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

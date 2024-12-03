@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "goods-cart-icon": "/components/goods-cart-icon/index",
+    "empty-image": "/components/empty-image/index",
+    "goods-sale-time": "/components/goods-sale-time/index",
+    "goods-item": "/components/goods-list/components/goods-item/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

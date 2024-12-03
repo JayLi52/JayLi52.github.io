@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-dynamic-text": "/components/qm-dynamic-text/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

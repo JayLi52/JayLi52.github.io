@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "recommend-stored-value": "/components/popup-pay/components/recommend-stored-value/index",
+    "qm-popup": "/components/popup/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

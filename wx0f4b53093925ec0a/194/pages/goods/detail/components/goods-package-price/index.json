@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

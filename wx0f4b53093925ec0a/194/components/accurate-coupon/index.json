@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "coupon-item": "/components/coupon-item/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

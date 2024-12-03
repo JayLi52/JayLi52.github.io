@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-popup": "/components/popup/index",
+    "auth-pop": "/components/auth-pop/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "count-down": "/components/count-down/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-popup": "/components/popup/index",
+    "qm-stepper": "/components/stepper/index",
+    "goods-cart-icon": "/components/goods-cart-icon/index",
+    "goods-cart-action": "/components/goods-cart-action/index",
+    "delivery-time": "/components/delivery-time/index",
+    "swipe-cell": "/components/swipe-cell/index",
+    "auth-mobile": "/components/auth-mobile/index",
+    "goods-list-item": "/components/goods-cart/components/goods-item/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

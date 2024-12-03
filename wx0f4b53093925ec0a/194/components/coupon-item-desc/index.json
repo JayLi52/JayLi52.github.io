@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "auth-mobile": "/components/auth-mobile/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

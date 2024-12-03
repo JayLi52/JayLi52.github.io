@@ -1,0 +1,24 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-loading": "/components/v-loading/index",
+    "count-down": "/components/count-down/index",
+    "qm-popup": "/components/popup/index",
+    "goods-list-item": "/components/order-goods-item/index",
+    "navigation-bar": "/components/navigation-bar/index",
+    "telephone-contact": "/components/telephone-contact/index",
+    "qm-adver": "/components/adver/index",
+    "goods-discount": "/components/goods-discount/index",
+    "discount-box": "/components/order/goods-discount/index",
+    "queue-up-progress": "/components/queue-up-progress/index",
+    "zongzi-reward": "/components/zongzi-reward/index",
+    "order-message": "/components/order-message/index",
+    "std-advertisement": "/std-components/std-advertisement/index",
+    "v-error": "/components/error/index",
+    "activity-book-players": "/components/order/activity-book-players/index",
+    "qiDanCode-message": "/components/qiDanCode-message/index",
+    "step": "/components/step/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

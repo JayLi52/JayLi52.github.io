@@ -1,0 +1,26 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-text": "/components/qm-text/index",
+    "goods-action": "/components/goods-action/index",
+    "goods-cart-icon": "/components/goods-cart-icon/index",
+    "goods-sku": "/components/goods-sku/index",
+    "goods-cart": "/components/goods-cart/index",
+    "navigation-shop": "/components/navigation-shop/index",
+    "goods-list": "/components/goods-list/index",
+    "qm-member-info": "/components/qm-member-info/index",
+    "limited-time-discount": "/components/limited-time-discount/index",
+    "pre-sale": "/components/pre-sale/index",
+    "spell-group": "/components/spell-group/index",
+    "d-customer": "/components/d-customer/index",
+    "coupon-center": "/components/coupon-center/index",
+    "qm-collect-point": "/components/collect-point/index",
+    "qm-banner": "/components/qm-banner/index",
+    "shop-list": "/components/shop-list/index",
+    "qm-equity-card": "/components/qm-equity-card/index",
+    "auth-mobile": "/components/auth-mobile/index",
+    "component-tree": "/components/index444913d1/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

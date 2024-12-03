@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "auth-mobile": "/components/auth-mobile/index",
+    "user-avatar": "/components/user-avatar/index",
+    "qm-popup": "/components/popup/index",
+    "no-auth-style": "/components/qm-member-info/no-auth-style/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

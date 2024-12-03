@@ -1,0 +1,17 @@
+{
+  "component": true,
+  "usingComponents": {
+    "v-loading": "/components/v-loading/index",
+    "count-down": "/components/count-down/index",
+    "qm-popup": "/components/popup/index",
+    "goods-list-item": "/components/order-goods-item/index",
+    "navigation-bar": "/components/navigation-bar/index",
+    "telephone-contact": "/components/telephone-contact/index",
+    "qm-adver": "/components/adver/index",
+    "goods-discount": "/components/goods-discount/index",
+    "queue-up-progress": "/components/queue-up-progress/index",
+    "zongzi-reward": "/components/zongzi-reward/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

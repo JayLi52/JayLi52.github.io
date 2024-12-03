@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "star": "/pages/goods/detail/components/star/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

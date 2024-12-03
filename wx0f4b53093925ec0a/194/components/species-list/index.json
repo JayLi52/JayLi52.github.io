@@ -1,0 +1,10 @@
+{
+  "component": true,
+  "usingComponents": {
+    "empty-image": "/components/empty-image/index",
+    "v-error": "/components/error/index",
+    "v-loading": "/components/v-loading/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

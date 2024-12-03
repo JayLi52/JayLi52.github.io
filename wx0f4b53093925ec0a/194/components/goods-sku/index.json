@@ -1,0 +1,14 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-popup": "/components/popup/index",
+    "qm-stepper": "/components/stepper/index",
+    "goods-limit-label": "/components/goods-limit-label/index",
+    "goods-spec": "/components/goods-sku/components/goods-spec/index",
+    "goods-attach": "/components/goods-sku/components/goods-attach/index",
+    "goods-property": "/components/goods-sku/components/goods-property/index",
+    "goods-message": "/components/goods-message/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

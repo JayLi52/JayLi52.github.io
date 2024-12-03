@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "order-message": "/components/order-message/index",
+    "qm-popup": "/components/popup/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

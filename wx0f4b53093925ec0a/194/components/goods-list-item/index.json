@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qm-stepper": "/components/stepper/index",
+    "goods-action-btn": "/components/goods-action-btn/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}

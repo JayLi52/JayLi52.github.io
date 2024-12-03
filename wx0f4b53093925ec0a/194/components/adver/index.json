@@ -1,0 +1,11 @@
+{
+  "component": true,
+  "usingComponents": {
+    "adver-popup": "/components/adver/popup/index",
+    "adver-banner": "/components/adver/banner/index",
+    "shop-list": "/components/shop-list/index",
+    "auth-mobile": "/components/auth-mobile/index",
+    "std-authorization": "/components/authorization/index",
+    "v-custom-page": "/components/v-custom-page/index"
+  }
+}
