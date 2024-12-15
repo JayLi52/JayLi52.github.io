@@ -7,6 +7,7 @@ import bgDark from '@/assets/bg-dark.jpg';
 import editor from '@/assets/editor.png';
 import waterMonitor from '@/assets/water-monitor.png'
 import wxAppletUnshell from '@/assets/wxAppletUnshell.png'
+import churchPng from '@/assets/组织管理成员.png'
 
 // HomeCard component
 const HomeCard = ({ title, time, description, links = [], icon }: any) => (
@@ -91,6 +92,21 @@ const Main = () => (
                 icon={editor}
             // links={[{ href: '/dist/#editor/', text: 'View demo...' }]}
             />
+
+            <h2 className="text-3xl font-serif italic font-bold mt-8">ReactNative</h2>
+            <HomeCard
+                title="Python Editor"
+                time="2021"
+                description={[
+                    'Church App',
+                ]}
+                icon={churchPng}
+                links={[{ href: 'https://github.com/JayLi52/Church', text: 'View Github' },
+                    { href: 'https://www.yuque.com/songguo-jhekj/zlwgof/ygzt3hvg6yx8g6tr?singleDoc# 《12.8 RN开发记录问题》', text: 'RN开发记录问题' },
+                    { href: 'https://github.com/JayLi52/Church/blob/main/app-debug.apk', text: 'Download app' },
+                ]}
+            />
+
             <h2 className="text-3xl font-serif italic font-bold mt-8">Editor</h2>
             <HomeCard
                 title="Python Editor"
